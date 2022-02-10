@@ -5,18 +5,18 @@ class Node
 public:
 	int data;
     Node *next;
-    Node *previous; 
+    //Node *previous; 
 	Node()
 	{
 		data = 0;
 		next = NULL;
-        previous = NULL;
+        //previous = NULL;
 	}
 	Node(int data)
 	{
 		this->data = data;
 		this->next = NULL;
-        this->previous = NULL;
+        //this->previous = NULL;
 	}
 };
 class LinkedList
