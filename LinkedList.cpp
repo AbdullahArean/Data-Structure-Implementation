@@ -46,7 +46,62 @@ private:
 		}
 		return prev;
 	}
-	
+	void 	partition(Node *head, Node **front, Node **back)
+{
+	Node *fast, *slow;
+	if (head == NULL || head->next == NULL){
+		*front = head; // &a
+		*back = NULL; //&b
+	}
+	else{
+		slow = head;
+		fast = head->next;
+
+		while(fast!=NULL){
+			fast = fast->next;
+			if(fast != NULL) {
+				slow = slow->next;
+				fast = fast->next;
+			}
+
+		}
+		*front = head; // &a
+		*back = slow->next; //&b
+		slow->next = NULL;
+	}
+}
+	Node 	*mergeLists(Node* a, Node *b)
+{
+	Node * mergedList= NULL;
+	if (a == NULL){
+        return b;
+    }else if (b == NULL){
+        return a;
+    }
+
+	if(a->data<= b->data){
+		mergedList = a;
+		mergedList->next= mergeLists(a->next,b);
+	}
+	else 
+	{
+		mergedList =b;
+		mergedList->next = mergeLists(a, b->next);
+	}
+	return mergedList;
+}
+	void 	mergeSort(Node* *source){
+	Node* head= *source;
+	Node *a= NULL, *b= NULL;
+	if(head == NULL || head->next == NULL) return;
+
+	partition(head, &a, &b);
+	mergeSort(&a);
+	mergeSort(&b);
+
+	*source = mergeLists(a,b);
+
+}
 public:
 				LinkedList()
 	{
@@ -149,6 +204,10 @@ public:
 		this->LinkedListHead = ReverseIterative(this->LinkedListHead);
 		//this->LinkedListHead = ReverseRecursion(this->LinkedListHead);
 
+	}
+	void 		Sort()
+	{
+	mergeSort(&this->LinkedListHead);
 	}
 };
 int main()
