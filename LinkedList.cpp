@@ -24,6 +24,29 @@ class LinkedList
 private:
 	Node *LinkedListHead;
 	int LengthOfLinkedList;
+	Node 	*ReverseRecursion(Node *current)
+	{
+
+		if (current == NULL || current->next == NULL)
+			return current;
+		Node *newhead = ReverseRecursion(current->next);
+		current->next->next = current;
+		current->next = NULL;
+		return newhead;
+	}
+	Node 	*ReverseIterative(Node *current)
+	{
+		Node *prev = NULL, *next = NULL;
+		while (current != NULL)
+		{
+			next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;
+		}
+		return prev;
+	}
+	
 public:
 				LinkedList()
 	{
@@ -121,7 +144,12 @@ public:
 }   
 	Node 		*ReturnLinkedListHead() 
 	{ return LinkedListHead; }
-	
+	void 		Reverse()
+	{
+		this->LinkedListHead = ReverseIterative(this->LinkedListHead);
+		//this->LinkedListHead = ReverseRecursion(this->LinkedListHead);
+
+	}
 };
 int main()
 {
