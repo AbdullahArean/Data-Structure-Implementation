@@ -218,37 +218,22 @@ public:
 	}
 	void 		DeleteNode(int position) 
 { 
-   // If linked list is empty 
-   if (this->LinkedListHead == NULL) 
-      return; 
+   if (this->LinkedListHead == NULL) return; 
   
-   // Store head node 
     Node* temp = this->LinkedListHead; 
-  
-    // If head needs to be removed 
     if (position == 0) 
     { 
-        this->LinkedListHead = temp->next;   // Change head 
-        free(temp);               // free old head 
+        this->LinkedListHead = temp->next;  
+        free(temp);        
         return; 
     } 
-  
-    // Find previous node of the node to be deleted 
     for (int i=0; temp!=NULL && i<position-1; i++) 
          temp = temp->next; 
-  
-    // If position is more than number of ndoes 
     if (temp == NULL || temp->next == NULL) 
          return; 
-  
-    // Node temp->next is the node to be deleted 
-    // Store pointer to the next of node to be deleted 
     Node *next = temp->next->next; 
-  
-    // Unlink the node from linked list 
-    free(temp->next);  // Free memory 
-  
-    temp->next = next;  // Unlink the deleted node from list 
+    free(temp->next); 
+    temp->next = next; 
 }   
 	Node 		*ReturnLinkedListHead() 
 	{ return LinkedListHead; }
