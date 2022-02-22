@@ -22,8 +22,8 @@ public:
 class LinkedList
 {
 private:
-	Node *LinkedListHead;
-	int LengthOfLinkedList;
+	Node 	*LinkedListHead;
+	int 	LengthOfLinkedList;
 	Node 	*ReverseRecursion(Node *current)
 	{
 
@@ -102,6 +102,51 @@ private:
 	*source = mergeLists(a,b);
 
 }
+	bool 	detectLoop(Node * head){
+	Node * slow_p= head, *fast_p = head;
+	while(slow_p && fast_p && fast_p->next){
+		slow_p=slow_p->next;
+		fast_p= fast_p->next->next;
+		if(slow_p==fast_p) return 1;
+	}
+	return 0;
+}
+	bool 	isPalindrome(Node *head)
+    {
+        Node* temp = head;
+        string str1, str2;
+        while(temp)
+        {
+            str1 = str1 + to_string(temp->data);
+            str2 = to_string(temp->data) + str2;
+            temp = temp->next;
+        }
+        
+        if(str1 == str2)
+        return true;
+        
+        return false;
+    }
+	Node* 	ReturnMiddle(Node *head){
+		//Delete middle is also easy
+        Node *slow_ptr = head;
+        Node *fast_ptr = head;
+		//Node * store = NULL; //To delete the middle element 
+  
+        if (head!=NULL)
+        {
+            while (fast_ptr && fast_ptr->next)
+            {
+                fast_ptr = fast_ptr->next->next;
+                slow_ptr = slow_ptr->next;
+				//if(fast_ptr->next) store = slow_ptr; //To delete the middle element 
+            }
+            //cout << "The middle element is [" << slow_ptr->data << "]" << endl; //To Print the middle element
+			//store->next= slow_ptr->next;//To delete the middle element 
+			
+        }
+		return slow_ptr;
+    }
 public:
 				LinkedList()
 	{
@@ -111,6 +156,14 @@ public:
 				LinkedList(Node *head)
 	{
 		this->LinkedListHead = head;
+		Node *current = head;
+		int count =0;
+		while(current!=NULL)
+		{
+			count++;
+			current = current->next;
+		}
+		this->LengthOfLinkedList = count;
 	}
 	int 		Length()
 	{
@@ -163,7 +216,7 @@ public:
 		}
 		cout << "\n";
 	}
-	void 		deleteNode(int position) 
+	void 		DeleteNode(int position) 
 { 
    // If linked list is empty 
    if (this->LinkedListHead == NULL) 
@@ -209,8 +262,37 @@ public:
 	{
 	mergeSort(&this->LinkedListHead);
 	}
+	bool 		IsLoopExist()
+	{
+		return detectLoop(this->LinkedListHead);
+	}
+	bool 		IsPalindrome()
+	{
+		return isPalindrome(this->LinkedListHead);
+	}
+	Node        *ReturnMiddleElement()
+	{
+		return ReturnMiddle(this->LinkedListHead);
+	}
 };
 int main()
 {
+	// LinkedList l1;
+	// l1.InsertNode(1,0);
+	// l1.InsertNode(2,1);
+	// l1.InsertNode(4,2);
+	// l1.InsertNode(1,3);
+	// l1.InsertNode(1,0);
+	// l1.InsertNode(2,1);
+	// l1.InsertNode(4,2);
+	// l1.InsertNode(1,3);
+	// l1.PrintList();
+	// l1.DeleteNode(3);
+	// l1.PrintList();
+	// cout<<l1.IsPalindrome()<<endl;
+	// cout<<l1.IsLoopExist()<<endl;
+	// cout<<l1.ReturnMiddleElement()->data<<endl;
+	// l1.Sort();
+	// l1.PrintList();
 	return 0;
 }
