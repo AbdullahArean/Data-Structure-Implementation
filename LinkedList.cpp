@@ -25,24 +25,24 @@ private:
 	Node *LinkedListHead;
 	int LengthOfLinkedList;
 public:
-    LinkedList();
-    int Length();
-    void InsertNode(int data, int position);
-    void PrintList()
-    Node *ReturnLinkedListHead()
-	LinkedList()
+				LinkedList()
 	{
 		LinkedListHead = NULL;
 		LengthOfLinkedList = 0;
-	}  
-	int Length()
+	}
+				LinkedList(Node *head)
+	{
+		this->LinkedListHead = head;
+	}
+	int 		Length()
 	{
 		return this->LengthOfLinkedList;
 	}
-	void InsertNode(int data, int position)
+	void 		InsertNode(int data, int position)
 	{
 		Node *newNode = new Node(data);
-        if(position<0) printf("Invalid Position!\n");
+		if (position < 0)
+			printf("Invalid Position!\n");
 		else if (LinkedListHead == NULL)
 		{
 			newNode->next = NULL;
@@ -70,7 +70,7 @@ public:
 		}
 		LengthOfLinkedList++;
 	}
-	void PrintList()
+	void 		PrintList()
 	{
 		Node *temp = LinkedListHead;
 		if (LinkedListHead == NULL)
@@ -85,39 +85,43 @@ public:
 		}
 		cout << "\n";
 	}
-	void DeleteNode(int position)
-	{
-		Node *temp1 = LinkedListHead, *temp2 = NULL;
-		if (this->LengthOfLinkedList == 0)
-		{
-			cout << "List is empty!" << endl;
-			return;
-		}
-		if (this->LengthOfLinkedList <= position)
-		{
-			cout << "Invalid Position!"<< endl;
-			return;
-		}
-		if (position == 0)
-		{
-			LinkedListHead = LinkedListHead->next;
-			delete temp1;
-			return;
-		}
-		while (position-- > 0)
-		{
-
-			temp2 = temp1;
-			temp1 = temp1->next;
-		}
-
-		temp2->next = temp1->next;
-
-		delete temp1;
-		this->LengthOfLinkedList--;
-		return;
-	}
-	Node *ReturnLinkedListHead() {return LinkedListHead;}
+	void 		deleteNode(int position) 
+{ 
+   // If linked list is empty 
+   if (this->LinkedListHead == NULL) 
+      return; 
+  
+   // Store head node 
+    Node* temp = this->LinkedListHead; 
+  
+    // If head needs to be removed 
+    if (position == 0) 
+    { 
+        this->LinkedListHead = temp->next;   // Change head 
+        free(temp);               // free old head 
+        return; 
+    } 
+  
+    // Find previous node of the node to be deleted 
+    for (int i=0; temp!=NULL && i<position-1; i++) 
+         temp = temp->next; 
+  
+    // If position is more than number of ndoes 
+    if (temp == NULL || temp->next == NULL) 
+         return; 
+  
+    // Node temp->next is the node to be deleted 
+    // Store pointer to the next of node to be deleted 
+    Node *next = temp->next->next; 
+  
+    // Unlink the node from linked list 
+    free(temp->next);  // Free memory 
+  
+    temp->next = next;  // Unlink the deleted node from list 
+}   
+	Node 		*ReturnLinkedListHead() 
+	{ return LinkedListHead; }
+	
 };
 int main()
 {
