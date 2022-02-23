@@ -208,8 +208,7 @@ private:
         else if (Current_Tree_Node->data<=x) return CountGreaterElement(Current_Tree_Node->right_child,x); 
         return 0;
        
-    }
-    
+    } 
     int CountSmallerElement(Node *Current_Tree_Node, int x)
     {
         if(Current_Tree_Node == NULL)
@@ -298,7 +297,7 @@ public:
 
     }
     int LowerBound (int x){
-        
+
     }
 };
 void Solution()
