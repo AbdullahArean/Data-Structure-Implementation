@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-#define MaxEdge 10000
+#define MaxEdge 100000
 class edge
 {
 public:
